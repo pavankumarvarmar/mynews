@@ -1,0 +1,25 @@
+
+     <% @news.each_with_index do |i, index| %>
+          <span><div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <div><a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index+1 %>">
+                  <%= i.first.capitalize %>
+                </a></div>
+              </h4>
+            </div>
+            <div id="collapse<%= index+1 %>" class="panel-collapse collapse">
+              <div class="panel-body">
+                <ul>
+                <% i.second.each_with_index do |s, index| %>
+                  <li><a href="<%= s.second %>" target="_blank"><%= s.first%></a></li>
+
+
+                <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </span>
+        <% end %>
+  
