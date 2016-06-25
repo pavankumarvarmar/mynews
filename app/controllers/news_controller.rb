@@ -1,7 +1,7 @@
 class NewsController < ApplicationController
   require 'nokogiri'
   require 'open-uri'
-  require 'pry'
+  
   before_action :set_news, only: [:show, :edit, :update, :destroy]
 
   # GET /news
@@ -19,9 +19,8 @@ class NewsController < ApplicationController
   def news
     news = News.all
     @news=[]
-   
     news.each do |item|
-      html_data=open("#{item.news_url}")
+    html_data=open("#{item.news_url}")
       
      doc = Nokogiri::HTML(html_data)
      
