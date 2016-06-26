@@ -38,10 +38,14 @@
 			<% if user_signed_in? %>
 			<li> <h3 style="border:1px solid black;margin-right: 20px; color:white;"> Hi <%= current_user.email.split("@").first.capitalize %></h3></li>
 			<li>
-				<h3 style="border:1px solid black;margin-right: 20px;"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>        
+			<h3 style="border:1px solid black; margin-right: 20px;"><%= link_to('Home', root_path) %></h3>        
 			</li>
+			
 			<li>
 			<h3 style="border:1px solid black; margin-right: 20px;"><%= link_to('Create Content', news_index_path) %></h3>        
+			</li>
+			<li>
+				<h3 style="border:1px solid black;margin-right: 20px;"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>        
 			</li>
 			<% else %>
 			<li>
