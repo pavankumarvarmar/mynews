@@ -1,7 +1,7 @@
 
      <% @news.each_with_index do |i, index| %>
-          <span><div class="panel panel-default">
-            <div class="panel-heading">
+          <span><div class="panel panel-default" style="margin:0px;">
+            <div class="panel-heading body-css">
               <h4 class="panel-title">
                 <div><a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index+1 %>">
                   <%= i.first.capitalize %>
@@ -9,7 +9,7 @@
               </h4>
             </div>
             <div id="collapse<%= index+1 %>" class="panel-collapse collapse">
-              <div class="panel-body">
+              <div class="panel-body panel-css">
                 <ul>
                 <% i.second.each_with_index do |s, index| %>
                   <li><a href="<%= s.second %>" target="_blank"><%= s.first%></a></li>
@@ -22,4 +22,30 @@
           </div>
           </span>
         <% end %>
+
+        <style>
+        .panel-css {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: auto;
+  height: 100%;
+  border: none;
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: rgba(255,255,255,1);
+  text-align: left;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: -webkit-linear-gradient(0deg, rgba(230,240,163,1) 0, rgba(210,230,56,1) 50%, rgba(195,216,37,1) 51%, rgba(219,240,67,1) 100%);
+  background: -moz-linear-gradient(90deg, rgba(230,240,163,1) 0, rgba(210,230,56,1) 50%, rgba(195,216,37,1) 51%, rgba(219,240,67,1) 100%);
+  background: linear-gradient(90deg, rgba(230,240,163,1) 0, rgba(210,230,56,1) 50%, rgba(195,216,37,1) 51%, rgba(219,240,67,1) 100%);
+  background-position: 50% 50%;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: auto auto;
+  background-size: auto auto;
+}
+        </style>
   
