@@ -12,7 +12,7 @@
               <div class="panel-body panel-css">
                 <ul>
                 <% i.second.each_with_index do |s, index| %>
-                  <li><a href="<%= s.second %>" target="_blank"><%= s.first%></a></li>
+                  <li><a href="<%= s.second.gsub! %r{/+}, '/' %>" target="_blank"><%= s.first%></a></li>
 
 
                 <% end %>
