@@ -1,89 +1,123 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mynews</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Akronim:300,400,600,700&amp;lang=en" />
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin+Slab:300,400,600,700&amp;lang=en" />
-  
+	<title>Mynews</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Akronim:300,400,600,700&amp;lang=en" />
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Josefin+Slab:300,400,600,700&amp;lang=en" />
+
 </head>
 <body class="body-css">
-<div class="container">
-<div class="col-md-12">
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+	<div class="container">
+<!-- <div class="col-md-8">
 <h1 class="header-css">My Magazine</h1>
 </div>
+<div class="col-md-4">
+<% if user_signed_in? %>
+  <li>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+  </li>
+<% else %>
+  <li>
+  <%= link_to('Login', new_user_session_path)  %>  
+  </li>
+<% end %>
+</div> -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<h1 class="header-css">My Magazine</h1>
+
+		</div>
+		<ul class="nav navbar-nav navbar-right">
+			<% if user_signed_in? %>
+			<li> <h3 style="border:1px solid black;margin-right: 20px; color:white;"> Hi <%= current_user.email.split("@").first.capitalize %></h3></li>
+			<li>
+				<h3 style="border:1px solid black;margin-right: 20px;"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></h3>        
+			</li>
+			<li>
+			<h3 style="border:1px solid black; margin-right: 20px;"><%= link_to('Create Content', news_index_path) %></h3>        
+			</li>
+			<% else %>
+			<li>
+				<h3 style="border:1px solid black; margin-right: 20px;"><%= link_to('Login', new_user_session_path)  %></h3>  
+			</li>
+			<% end %>
+		</ul>
+	</div>
+</nav>
 <div class="container">
-<div class="jumbotron body-css col-md-7">
-<%= yield %>
-</div>
-<div class="jumbotron body-css col-md-2">
-<h4>About:</h4>
-<p>This site gives you a central location to manage and read web content from different news sites, blogs and websites. This will save your time of browsing. Configure one time and
-enjoy the benefits.</p>
-</div>
+	<div class="jumbotron body-css col-md-7">
+		<%= yield %>
+	</div>
+	<div class="jumbotron body-css col-md-2">
+		<h4>About:</h4>
+		<p>This site gives you a central location to manage and read web content from different news sites, blogs and websites. This will save your time of browsing. Configure one time and
+			enjoy the benefits.</p>
+		</div>
 
-<div class="container body-css col-md-12">
-<p>Designed by Pavan Kumar Varma. This site is a demo site. Not for commercial use.</p>
-</div>
-</div>
- </body>
- </html>
- <style>
- .header-css {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  margin: 0px;
-  padding: 17px;
-  border: none;
-  font: italic normal bold 76px/1 "Akronim", Helvetica, sans-serif;
-  color: #b2ff00;
-  text-align: center;
-  text-indent: 7px;
-  -o-text-overflow: clip;
-  text-overflow: clip;
-  letter-spacing: 11px;
-  white-space: pre-line;
-  word-spacing: 25px;
-  background: -webkit-linear-gradient(0deg, rgba(157,213,58,0.3) 0, rgba(161,213,79,0.3) 50%, rgba(128,194,23,0.6) 51%, rgba(124,188,10,0.9) 100%);
-  background: -moz-linear-gradient(90deg, rgba(157,213,58,0.3) 0, rgba(161,213,79,0.3) 50%, rgba(128,194,23,0.6) 51%, rgba(124,188,10,0.9) 100%);
-  background: linear-gradient(90deg, rgba(157,213,58,0.3) 0, rgba(161,213,79,0.3) 50%, rgba(128,194,23,0.6) 51%, rgba(124,188,10,0.9) 100%);
-  background-repeat: repeat-y;
-  background-position: 73% 50%;
-  -webkit-background-origin: padding-box;
-  background-origin: padding-box;
-  -webkit-background-clip: border-box;
-  background-clip: border-box;
-  -webkit-background-size: auto auto;
-  background-size: auto auto;
-  text-shadow: 4px 4px 6px rgba(0,0,0,0.5) ;
-}
-.body-css {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  margin-left:0px;
-  /*width: 90%;*/
-  /*height: 100%;*/
-  border: none;
-  font: normal 16px/1 "Josefin Slab", Times, serif;
-  /*color: rgba(255,255,255,1);*/
-  text-align: left;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  background: -webkit-linear-gradient(0deg, rgba(180,227,145,0.3) 0, rgba(97,196,25,0.9) 50%, rgba(180,227,145,0.3) 100%);
-  background: -moz-linear-gradient(90deg, rgba(180,227,145,0.3) 0, rgba(97,196,25,0.9) 50%, rgba(180,227,145,0.3) 100%);
-  background: linear-gradient(90deg, rgba(180,227,145,0.3) 0, rgba(97,196,25,0.9) 50%, rgba(180,227,145,0.3) 100%);
-  background-position: 50% 50%;
-  -webkit-background-origin: padding-box;
-  background-origin: padding-box;
-  -webkit-background-clip: border-box;
-  background-clip: border-box;
-  -webkit-background-size: auto auto;
-  background-size: auto auto;
-}
+		<div class="container body-css col-md-12">
+			<p>Designed by Pavan Kumar Varma. This site is a demo site. Not for commercial use.</p>
+		</div>
+	</div>
+</body>
+</html>
+<style>
+	.header-css {
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
+		margin: 0px;
+		padding: 17px;
+		border: none;
+		font: italic normal bold 35px/1 "Akronim", Helvetica, sans-serif;
+		color: #b2ff00;
+		text-align: center;
+		text-indent: 7px;
+		-o-text-overflow: clip;
+		text-overflow: clip;
+		letter-spacing: 11px;
+		white-space: pre-line;
+		word-spacing: 25px;
+		background-repeat: repeat-y;
+		background-position: 73% 50%;
+		-webkit-background-origin: padding-box;
+		background-origin: padding-box;
+		-webkit-background-clip: border-box;
+		background-clip: border-box;
+		-webkit-background-size: auto auto;
+		background-size: auto auto;
+		text-shadow: 4px 4px 6px rgba(0,0,0,0.5) ;
+	}
+	.body-css {
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
+		margin-left:0px;
+		/*width: 90%;*/
+		/*height: 100%;*/
+		border: none;
+		font: normal 16px/1 "Josefin Slab", Times, serif;
+		/*color: rgba(255,255,255,1);*/
+		text-align: left;
+		-o-text-overflow: ellipsis;
+		text-overflow: ellipsis;
+		background: -webkit-linear-gradient(0deg, rgba(180,227,145,0.3) 0, rgba(97,196,25,0.9) 50%, rgba(180,227,145,0.3) 100%);
+		background: -moz-linear-gradient(90deg, rgba(180,227,145,0.3) 0, rgba(97,196,25,0.9) 50%, rgba(180,227,145,0.3) 100%);
+		background: linear-gradient(90deg, rgba(180,227,145,0.3) 0, rgba(97,196,25,0.9) 50%, rgba(180,227,145,0.3) 100%);
+		background-position: 50% 50%;
+		-webkit-background-origin: padding-box;
+		background-origin: padding-box;
+		-webkit-background-clip: border-box;
+		background-clip: border-box;
+		-webkit-background-size: auto auto;
+		background-size: auto auto;
+	}
 
 
- </style>
+</style>

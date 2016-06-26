@@ -7,7 +7,7 @@ class NewsController < ApplicationController
   # GET /news
   # GET /news.json
   def index
-    @news = News.all
+    @news = News.where(user_id: current_user.id)
       
   end
 
@@ -17,24 +17,25 @@ class NewsController < ApplicationController
   end
 
   def news
-    news = News.all
+    news = News.where(user_id: current_user.id)
+
     @news=[]
     news.each do |item|
-    html_data=open("#{item.news_url}")
+      html_data=open("#{item.news_url}")
       
-     doc = Nokogiri::HTML(html_data)
-     
-     @news_item=[]
-     style=item.news_style
+      doc = Nokogiri::HTML(html_data)
+
+      @news_item=[]
+      style=item.news_style
 
 
-     doc.css(style.to_s).each do |link|
+      doc.css(style.to_s).each do |link|
        news_link = item.include_url? ? item.news_url+"/"+link["href"] : link["href"]
-        @news_item <<  [link.text.strip,news_link]
-      end
-      @news << [item.title,@news_item]
-        
-    end
+       @news_item <<  [link.text.strip,news_link]
+     end
+     @news << [item.title,@news_item]
+
+   end
   end
 
   # GET /news/new
@@ -50,6 +51,7 @@ class NewsController < ApplicationController
   # POST /news.json
   def create
     @news = News.new(news_params)
+    @news.user_id=current_user.id
 
     respond_to do |format|
       if @news.save
@@ -65,6 +67,7 @@ class NewsController < ApplicationController
   # PATCH/PUT /news/1
   # PATCH/PUT /news/1.json
   def update
+    @news.user_id=current_user.id
     respond_to do |format|
       if @news.update(news_params)
         format.html { redirect_to @news, notice: 'News was successfully updated.' }
@@ -94,6 +97,6 @@ class NewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def news_params
-      params.require(:news).permit(:title, :news_url, :news_style, :include_url)
+      params.require(:news).permit(:title, :news_url, :news_style, :include_url,:user_id)
     end
 end
