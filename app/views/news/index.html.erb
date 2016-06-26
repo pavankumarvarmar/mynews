@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<% if @news.present? %>
 <h1>Listing Contents</h1>
 
 <table class="table">
@@ -23,7 +24,7 @@
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
 
 <%= link_to 'New Content', new_news_path %>
